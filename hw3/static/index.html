@@ -1,0 +1,28 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Index</title>
+  </head>
+  <body>
+    <h1>Страница index</h1>
+    <p>Просмотров: <span id="indexPageViews"></span></p>
+    <a href="/about.html">Ссылка на страницу /about</a>
+
+    <script>
+      async function getPageViews() {
+        try {
+          const response = await fetch('/pageViewsData')
+          const data = await response.json()
+          document.getElementById('indexPageViews').innerText =
+            data['/index.html'] || 0
+        } catch (error) {
+          console.error('Ошибка при получении данных о просмотрах:', error)
+        }
+      }
+
+      getPageViews()
+    </script>
+  </body>
+</html>
